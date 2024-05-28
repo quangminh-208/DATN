@@ -91,7 +91,7 @@ export default defineComponent({
             @change="search"
             single-line
         ></v-text-field>
-        <v-btn color="primary" @click="redirectNew"  class="my-2">Thêm mới</v-btn>
+        <v-btn color="primary" @click="redirectNew">Thêm mới</v-btn>
         <v-data-table
             :headers="headers"
             :items="voucherPage.content"

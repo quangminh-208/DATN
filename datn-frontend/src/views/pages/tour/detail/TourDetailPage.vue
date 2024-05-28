@@ -37,6 +37,7 @@ export default defineComponent({
 
 <template>
     <header-component/>
+    <slide-component/>
     <div class="d-flex justify-content-center">
         <div class="container">
             <tour-detail-component :tour="tour"/>

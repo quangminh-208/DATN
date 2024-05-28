@@ -39,13 +39,6 @@ const router = createRouter({
             }
         },
         {
-            path: '/about',
-            component: () => import('@/views/pages/about/AboutPage.vue'),
-            meta: {
-                requiresAuth: false
-            }
-        },
-        {
             path: '/tour/:id',
             component: () => import('@/views/pages/tour/detail/TourDetailPage.vue'),
             name: 'tourDetail',
