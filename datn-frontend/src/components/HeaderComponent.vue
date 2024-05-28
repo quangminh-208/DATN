@@ -211,29 +211,30 @@ export default defineComponent({
             :key="index"
           >
             <a class="header__menu__item__link">{{ item?.name }}</a>
-            <div class="dropdown-menu header__menu__submenu container-xxl">
+            <div class="dropdown-menu container">
               <div
                 class="row justify-content-around"
                 v-if="item?.children && item?.children?.length > 0"
               >
                 <div
-                  class=""
+                  class="col-4"
                   v-for="(subItem, subIndex) in item?.children"
                   :key="subIndex"
                 >
-                  <div role="button" class="dropdown-header">
+                  <div role="button" class="dropdown-header fw-bold">
                     <h5 @click.prevent="search(subItem?.id)">
                       {{ subItem?.name }}
                     </h5>
                   </div>
-                  <a
-                    :href="`/tour/${tour.id}`"
+                  <div
                     class="text-dark dropdown-item"
-                    v-for="(tour, indexTour) in subItem?.tours"
+                    v-for="(location, indexTour) in subItem?.children"
                     :key="indexTour"
                   >
-                    {{ tour.name }}
-                  </a>
+                    <p @click.prevent="search(location?.id)">
+                      {{ location?.name }}
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -411,7 +412,7 @@ export default defineComponent({
 /* Header menu */
 .header__menu__wrapper {
   background-color: $white-soft;
-  box-shadow: 0 2px 8px $gray-light;
+  box-shadow: 0 2px 10px $gray-soft;
   .header__menu {
     display: flex;
     align-items: center;
@@ -444,8 +445,8 @@ export default defineComponent({
         }
 
         .dropdown-menu {
-          min-width: 76rem;
-          left: -50%;
+          min-width: 60vw;
+          left: -100%;
         }
       }
 

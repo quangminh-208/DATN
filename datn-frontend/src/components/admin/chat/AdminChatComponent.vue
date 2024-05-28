@@ -90,7 +90,7 @@ export default defineComponent({
         <div class="card chat-app">
           <div id="plist" class="people-list">
             <div class="input-group">
-              <div class="input-group-prepend">
+              <div class="input-group-prepend d-flex">
                 <span class="input-group-text"
                   ><i class="fa fa-search"></i
                 ></span>
@@ -99,7 +99,7 @@ export default defineComponent({
             </div>
             <ul class="list-unstyled chat-list mt-2 mb-0">
               <li
-                class="clearfix"
+                class="clearfix d-flex align-items-center"
                 v-for="(item, index) in users"
                 :key="index"
                 @click.prevent="setAdminSelected(item)"
@@ -108,7 +108,7 @@ export default defineComponent({
                 <v-avatar
                   :image="'data:image/png;base64,' + item.avatar"
                   size="30"
-                  class="border-dark"
+                  class="border-dark avatar"
                 ></v-avatar>
                 <div class="about">
                   <div class="name">{{ item?.username }}</div>
@@ -116,19 +116,19 @@ export default defineComponent({
               </li>
             </ul>
           </div>
-          <div class="chat">
-            <div class="chat-header clearfix">
+          <div class="chat d-flex flex-column justify-content-between">
+            <div class="chat-header clearfix p-3">
               <div class="row">
-                <div class="col-lg-6">
+                <div class="col-lg-6 d-flex align-items-center">
                   <a>
                     <v-avatar
                       :image="'data:image/png;base64,' + userSelected.avatar"
                       size="30"
-                      class="border-dark"
+                      class="border-dark avatar"
                     ></v-avatar>
                   </a>
                   <div class="chat-about">
-                    <h6 class="m-b-0">{{ userSelected.username }}</h6>
+                    <h6 class="m-0">{{ userSelected.username }}</h6>
                   </div>
                 </div>
               </div>
@@ -177,18 +177,18 @@ export default defineComponent({
               </ul>
             </div>
             <div class="chat-message clearfix">
-              <div class="input-group mb-0">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" @click.prevent="sendMessage"
-                    ><i class="fa fa-send"></i
-                  ></span>
-                </div>
+              <div class="input-group">
                 <input
                   type="text"
                   class="form-control"
                   placeholder="Enter text here..."
                   v-model="message"
                 />
+                <div class="input-group-prepend d-flex">
+                  <span class="input-group-text" @click.prevent="sendMessage"
+                    ><i class="fa fa-send"></i
+                  ></span>
+                </div>
               </div>
             </div>
           </div>
@@ -199,11 +199,6 @@ export default defineComponent({
 </template>
 
 <style scoped>
-body {
-  background-color: #f4f7f6;
-  margin-top: 20px;
-}
-
 .card {
   background: #fff;
   transition: 0.5s;
@@ -246,7 +241,6 @@ body {
   padding: 10px 15px;
   list-style: none;
   border-radius: 3px;
-  overflow: hidden;
 }
 
 .people-list .chat-list li:hover {
@@ -272,8 +266,10 @@ body {
   border-radius: 50%;
 }
 
-.people-list .about {
+.avatar {
   float: left;
+}
+.people-list .about {
   padding-left: 8px;
 }
 
@@ -281,9 +277,11 @@ body {
   color: #999;
   font-size: 13px;
 }
+.chat {
+  height: 100%;
+}
 
 .chat .chat-header {
-  padding: 15px 20px;
   border-bottom: 2px solid #f4f7f6;
 }
 
@@ -294,13 +292,16 @@ body {
 }
 
 .chat .chat-header .chat-about {
-  float: left;
   padding-left: 10px;
 }
 
 .chat .chat-history {
   padding: 20px;
   border-bottom: 2px solid #fff;
+  height: 100%;
+  overflow: auto;
+  display: flex;
+  flex-direction: column-reverse;
 }
 
 .chat .chat-history ul {

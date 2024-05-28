@@ -35,8 +35,8 @@ export default defineComponent({
             <h1>Chi tiết người dùng</h1>
         </div>
        <div class="d-flex justify-content-center">
-           <v-form class="container row col-6">
-               <v-avatar v-if="user.avatar" size="100" :image="'data:image/png;base64,' + user?.avatar"></v-avatar>
+           <v-form class="container row col-6 d-flex justify-content-center">
+               <v-avatar v-if="user.avatar" class="my-6" size="100" :image="'data:image/png;base64,' + user?.avatar"></v-avatar>
                <v-text-field v-model="user.username" label="Username" :readonly="true"></v-text-field>
                <v-text-field v-model="user.email" label="Email" :readonly="true"></v-text-field>
                <v-text-field v-model="user.address" label="Địa chỉ" :readonly="true"></v-text-field>

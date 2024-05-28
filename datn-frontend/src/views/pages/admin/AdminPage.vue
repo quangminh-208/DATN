@@ -67,7 +67,7 @@ export default defineComponent({
     <div class="row flex-nowrap">
       <div class="col-auto col-md-3 col-xl-2 p-0 bg-dark">
         <div
-          class="d-flex flex-column align-items-center align-items-sm-start text-white min-vh-100"
+          class="d-flex flex-column align-items-center align-items-sm-start text-white vh-100"
         >
           <div class="w-100 bg-primary">
             <a
@@ -138,15 +138,16 @@ export default defineComponent({
               aria-expanded="false"
             >
               <v-avatar
-                size="50"
+                size="40"
                 :image="'data:image/png;base64,' + userCurrent?.avatar"
+                class="my-2 mx-4"
               ></v-avatar>
               <span class="d-none d-sm-inline mx-1">{{
                 userCurrent?.username
               }}</span>
             </a>
             <ul
-              class="dropdown-menu dropdown-menu-dark text-small shadow"
+              class="dropdown-menu dropdown-menu-dark text-small shadow ml-3"
               aria-labelledby="dropdownUser1"
             >
               <li>
@@ -158,7 +159,7 @@ export default defineComponent({
           </div>
         </div>
       </div>
-      <div class="col p-3">
+      <div class="content col p-3">
         <slot></slot>
       </div>
     </div>
@@ -173,5 +174,9 @@ a {
 .user-wrapper {
   position: absolute;
   bottom: 0;
+}
+
+.content {
+
 }
 </style>
