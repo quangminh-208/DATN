@@ -32,9 +32,9 @@ public class TourV2Controller {
         return this.tourService.findBySearch(model);
     }
 
-    @GetMapping("/findByNewest")
-    public List<Tour> findByNewest() {
-        return this.tourService.findByNewest();
+    @PostMapping("/findByNewest")
+    public List<Tour> findByNewest(@RequestBody TourSearchRequest model) {
+        return this.tourService.findByNewest(model);
     }
 
     @GetMapping("/getQRCodePurchase/{id}")

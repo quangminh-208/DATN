@@ -15,8 +15,8 @@ export class TourService {
         return response.data;
     }
 
-    public async findByNewest() {
-        const response = await axios.get(`${this.url}/findByNewest`);
+    public async findByNewest(model : any) {
+        const response = await axios.post(`${this.url}/findByNewest`, model);
         return response.data;
     }
 

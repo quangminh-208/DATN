@@ -13,12 +13,36 @@ window.onscroll = function () {
 
 export default defineComponent({
     name: 'HeaderComponent',
-    methods: {
-        router() {
-            return router
+    data() {
+        return {
+            keyword : this.$route.query.keyword || '',
         }
     },
-    props: {},
+    methods:
+        {
+            router() {
+                return router
+            },
+            search(categoryId: string | null | undefined = null) {
+                const isString = (value: any): value is string => {
+                    return typeof value === 'string';
+                };
+
+                const validKeyword = isString(this.keyword) ? this.keyword : '';
+
+                let validCategoryId = isString(categoryId) ? categoryId : '';
+                if(this.$route.query.categoryId){
+                    validCategoryId = this.$route.query.categoryId as string;
+                }
+                if (validKeyword !== '' || validCategoryId !== '') {
+                    document.location.href = `/search?keyword=${validKeyword}&categoryId=${validCategoryId}`;
+                }
+            }
+
+        }
+    ,
+    props: {}
+    ,
     setup() {
         const error = ref(null);
         const loggedIn = ref(false);
@@ -31,14 +55,14 @@ export default defineComponent({
         }
 
         const items = [
-            { title: 'Tài khoản', path: '/profile', priority: 1 },
-            { title: 'Đơn hàng', path: '/order', priority: 2 },
-            { title: 'Tin nhắn', path: '/message', priority: 3 },
-            { title: 'Đăng xuất', path: '/logout', priority: 5 },
+            {title: 'Tài khoản', path: '/profile', priority: 1},
+            {title: 'Đơn hàng', path: '/order', priority: 2},
+            {title: 'Tin nhắn', path: '/message', priority: 3},
+            {title: 'Đăng xuất', path: '/logout', priority: 5},
         ];
 
         if (isAdmin) {
-            items.push({ title: 'Quản lý', path: '/admin', priority: 4 });
+            items.push({title: 'Quản lý', path: '/admin', priority: 4});
         }
 
         items.sort((a, b) => a.priority - b.priority);
@@ -51,16 +75,16 @@ export default defineComponent({
             try {
                 const response = await categoryService.findAllCategoryClient();
                 categoryList.splice(0, categoryList.length, ...response); // Update categoryList with response
-                console.log(categoryList);
-            } catch (err : any) {
+            } catch (err: any) {
                 error.value = err.message || 'Error fetching categories';
             }
         };
 
         fetchCategory(); // Call fetchCategory() to fetch categories asynchronously
 
-        return { error, loggedIn, items, redirect, categoryList };
-    },
+        return {error, loggedIn, items, redirect, categoryList};
+    }
+    ,
     mounted() {
     }
 });
@@ -129,8 +153,8 @@ export default defineComponent({
                 </RouterLink>
 
                 <div class="header__main__search">
-                    <input type="text" class="header__main__search-box" placeholder="Tìm kiếm..."/>
-                    <button class="header__main__search-btn">
+                    <input type="text" class="header__main__search-box" placeholder="Tìm kiếm..." v-model="keyword"/>
+                    <button class="header__main__search-btn" @click.prevent="search">
                         <span class="mdi mdi-magnify"></span>
                     </button>
                 </div>
@@ -171,13 +195,14 @@ export default defineComponent({
                         <RouterLink to="/" class="header__menu__item__link"> Trang chủ</RouterLink>
                     </li>
                     <li class="header__menu__item dropdown-center" v-for="(item,index) in categoryList" :key="index">
-                        <a href="#" class="header__menu__item__link">{{item?.name}}</a>
+                        <a class="header__menu__item__link">{{ item?.name }}</a>
                         <div class="dropdown-menu header__menu__submenu container-xxl">
                             <div class="row justify-content-around" v-if="item?.children && item?.children?.length > 0">
-                                <div class="col-6 col-sm-3 col-xs-12"  v-for="(subItem,subIndex) in item?.children" :key="subIndex">
-                                    <div class="dropdown-header">
-                                        <h5>
-                                            {{subItem?.name}}
+                                <div class="col-6 col-sm-3 col-xs-12" v-for="(subItem,subIndex) in item?.children"
+                                     :key="subIndex">
+                                    <div role="button">
+                                        <h5  @click.prevent="search(subItem?.id)">
+                                            {{ subItem?.name }}
                                         </h5>
                                     </div>
                                     <a

@@ -25,9 +25,11 @@ public interface TourRepo extends JpaRepository<Tour, UUID>, JpaSpecificationExe
 
     @Query("""
             select t from Tour t
+            where (:#{#model.keyword} is null or lower(t.name) like lower(concat('%', :#{#model.keyword}, '%')))
+            and  (:#{#model.categoryId} is null or t.category.id = :#{#model.categoryId})
             order by t.createDate desc
             """)
-    List<Tour> findByNewest();
+    List<Tour> findByNewest(TourSearchRequest model);
 
     List<Tour> findByCategoryId(UUID categoryId);
 }
