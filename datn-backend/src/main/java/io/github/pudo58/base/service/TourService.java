@@ -17,7 +17,7 @@ import java.util.UUID;
 public interface TourService extends Service<Tour> {
     Page<Tour> findBySearch(TourSearchRequest model);
 
-    List<Tour> findByNewest();
+    List<Tour> findByNewest(TourSearchRequest model);
 
     ResponseEntity<?> bookTour(TourRequest model);
 

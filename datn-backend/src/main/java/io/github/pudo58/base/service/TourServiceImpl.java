@@ -65,8 +65,8 @@ public class TourServiceImpl extends AbstractService<Tour> implements TourServic
     }
 
     @Override
-    public List<Tour> findByNewest() {
-        return tourRepo.findByNewest();
+    public List<Tour> findByNewest(TourSearchRequest model) {
+        return tourRepo.findByNewest(model);
     }
 
     @Override
