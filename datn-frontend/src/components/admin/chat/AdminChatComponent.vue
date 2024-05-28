@@ -1,3 +1,77 @@
+<template>
+    <div class="container">
+        <div class="row clearfix">
+            <div class="col-lg-12">
+                <div class="card chat-app">
+                    <div id="plist" class="people-list">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-search"></i></span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Search...">
+                        </div>
+                        <ul class="list-unstyled chat-list mt-2 mb-0">
+                            <li class="clearfix" v-for="(item,index) in users" :key="index" @click.prevent="setAdminSelected(item)" :class="{'active' : userSelected?.username === item?.username}">
+                                <v-avatar :image="'data:image/png;base64,' + item.avatar" size="30" class="border-dark"></v-avatar>
+                                <div class="about">
+                                    <div class="name">{{item?.username}}</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="chat">
+                        <div class="chat-header clearfix">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <a>
+                                        <v-avatar :image="'data:image/png;base64,' + userSelected.avatar" size="30" class="border-dark"></v-avatar>
+                                    </a>
+                                    <div class="chat-about">
+                                        <h6 class="m-b-0">{{userSelected.username}}</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chat-history">
+                            <ul class="m-b-0">
+                                <li class="clearfix" v-for="(item, index) in messageList" :key="index">
+                                    <div v-if="item?.from.username  === user?.username">
+                                        <div class="message-data text-right">
+                                            <span class="message-data-time">{{formatDate(item?.timestamp)}}</span>
+                                            <v-avatar :image="'data:image/png;base64,' + item?.user?.avatar" size="30" class="border-dark"></v-avatar>
+                                        </div>
+                                        <div class="message other-message float-right">
+                                            {{item?.message}}
+                                        </div>
+                                    </div>
+                                    <div v-else>
+                                        <div class="message-data">
+                                            <v-avatar :image="'data:image/png;base64,' + item?.user?.avatar" size="30" class="border-dark"></v-avatar>
+                                            <span class="message-data-name">{{item?.user?.username}}</span>
+                                            <span class="message-data-time">{{formatDate(item?.timestamp)}}</span>
+                                        </div>
+                                        <div class="message my-message">
+                                            {{item?.message}}
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="chat-message clearfix">
+                            <div class="input-group mb-0">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" @click.prevent="sendMessage"><i class="fa fa-send"></i></span>
+                                </div>
+                                <input type="text" class="form-control" placeholder="Enter text here..." v-model="message">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
 <script lang="ts">
 import {defineComponent, inject} from 'vue';
 import {ChatService} from "@/base/service/chat.service";
@@ -78,81 +152,6 @@ export default defineComponent({
 });
 </script>
 
-<template>
-    <div class="container">
-        <div class="row clearfix">
-            <div class="col-lg-12">
-                <h1 class="text-dark mb-6">Trung tâm tin nhắn</h1>
-                <div class="card chat-app">
-                    <div id="plist" class="people-list">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fa fa-search"></i></span>
-                            </div>
-                            <input type="text" class="form-control" placeholder="Search...">
-                        </div>
-                        <ul class="list-unstyled chat-list mt-2 mb-0">
-                            <li class="clearfix" v-for="(item,index) in users" :key="index" @click.prevent="setAdminSelected(item)" :class="{'active' : userSelected?.username === item?.username}">
-                                <v-avatar :image="'data:image/png;base64,' + item.avatar" size="30" class="border-dark"></v-avatar>
-                                <div class="about">
-                                    <div class="name">{{item?.username}}</div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="chat">
-                        <div class="chat-header clearfix">
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <a>
-                                        <v-avatar :image="'data:image/png;base64,' + userSelected.avatar" size="30" class="border-dark"></v-avatar>
-                                    </a>
-                                    <div class="chat-about">
-                                        <h6 class="m-b-0">{{userSelected.username}}</h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="chat-history">
-                            <ul class="m-b-0">
-                                <li class="clearfix" v-for="(item, index) in messageList" :key="index">
-                                    <div v-if="item?.from.username  === user?.username">
-                                        <div class="message-data text-right">
-                                            <span class="message-data-time">{{formatDate(item?.timestamp)}}</span>
-                                            <v-avatar :image="'data:image/png;base64,' + item?.user?.avatar" size="30" class="border-dark"></v-avatar>
-                                        </div>
-                                        <div class="message other-message float-right">
-                                            {{item?.message}}
-                                        </div>
-                                    </div>
-                                    <div v-else>
-                                        <div class="message-data">
-                                            <v-avatar :image="'data:image/png;base64,' + item?.user?.avatar" size="30" class="border-dark"></v-avatar>
-                                            <span class="message-data-name">{{item?.user?.username}}</span>
-                                            <span class="message-data-time">{{formatDate(item?.timestamp)}}</span>
-                                        </div>
-                                        <div class="message my-message">
-                                            {{item?.message}}
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="chat-message clearfix">
-                            <div class="input-group mb-0">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" @click.prevent="sendMessage"><i class="fa fa-send"></i></span>
-                                </div>
-                                <input type="text" class="form-control" placeholder="Enter text here..." v-model="message">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</template>
-
 <style scoped>
 body {
     background-color: #f4f7f6;
@@ -168,7 +167,6 @@ body {
     position: relative;
     width: 100%;
     box-shadow: 0 1px 2px 0 rgb(0 0 0 / 10%);
-    height: 84vh;
 }
 
 .chat-app .people-list {
@@ -192,16 +190,10 @@ body {
     transition: .5s
 }
 
-.people-list .chat-list {
-    height: 83vh;
-    overflow: auto;
-}
-
 .people-list .chat-list li {
     padding: 10px 15px;
     list-style: none;
-    border-radius: 3px;
-    overflow: hidden;
+    border-radius: 3px
 }
 
 .people-list .chat-list li:hover {

@@ -10,9 +10,10 @@ export default defineComponent({
     components: {HeaderComponent, FooterComponent},
     setup() {
         const headers = [
+            {title: 'STT', value: 'index'},
             {title: 'Tiêu đề', value: 'title'},
             {title: 'Chi tiết bài viết', value: 'content'},
-            {title: '', value: 'action', sortable: false},
+            {title: 'Hành động', value: 'action', sortable: false},
         ];
         return {
             headers,
@@ -66,7 +67,7 @@ export default defineComponent({
                         <h1 class="text-center">Danh sách bài viết</h1>
                     </div>
                     <div class="col-12">
-                        <div class="d-flex justify-content-between align-items-center">
+                        <div class="d-flex justify-content-between">
                             <v-text-field v-model="searchParams.keyword" label="Tìm kiếm"></v-text-field>
                             <v-btn @click="search" color="primary">Tìm kiếm</v-btn>
                         </div>
@@ -83,6 +84,9 @@ export default defineComponent({
                            :search="searchParams.keyword"
                            :total-items="postPage.totalElements"
                         >
+                            <template v-slot:[`item.index`]="{index}">
+                                {{index + 1}}
+                            </template>
                             <template v-slot:[`item.content`]="{item}">
                                 <div v-html="item.content"></div>
                             </template>

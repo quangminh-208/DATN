@@ -18,7 +18,7 @@ const router = createRouter({
             }
         },
         {
-            path: '/index',
+            path: '/search',
             component: () => import('@/views/pages/home/HomePage.vue'),
             meta: {
                 requiresAuth: false
@@ -34,13 +34,6 @@ const router = createRouter({
         {
             path: '/register',
             component: () => import('@/views/pages/register/RegisterPage.vue'),
-            meta: {
-                requiresAuth: false
-            }
-        },
-        {
-            path: '/about',
-            component: () => import('@/views/pages/about/AboutPage.vue'),
             meta: {
                 requiresAuth: false
             }
