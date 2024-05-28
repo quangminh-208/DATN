@@ -75,7 +75,7 @@ export default defineComponent({
             @change="search"
             single-line
         ></v-text-field>
-        <v-btn color="primary" @click="() => $router.push('/admin/category/new')">Thêm mới</v-btn>
+        <v-btn color="primary" @click="() => $router.push('/admin/category/new')" class="my-2">Thêm mới</v-btn>
         <v-data-table
             :headers="headers"
             :items="categoryPage.content"

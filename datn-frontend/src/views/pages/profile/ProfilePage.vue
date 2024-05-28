@@ -7,7 +7,7 @@ import SlideComponent from "@/components/SlideComponent.vue";
 
 export default defineComponent({
     components: {
-        SlideComponent, HeaderComponent, FooterComponent,
+        HeaderComponent, FooterComponent,
         ProfileComponent
     },
 });
@@ -15,7 +15,6 @@ export default defineComponent({
 
 <template>
     <header-component/>
-    <slide-component/>
     <div class="d-flex justify-content-center">
         <div class="container">
             <profile-component/>

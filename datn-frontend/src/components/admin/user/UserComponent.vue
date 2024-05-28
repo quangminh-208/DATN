@@ -76,6 +76,7 @@ export default defineComponent({
             hide-details
             @change="search"
             single-line
+            class="my-2"
         ></v-text-field>
         <v-data-table
             :headers="headers"

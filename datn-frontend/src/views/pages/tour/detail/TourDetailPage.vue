@@ -10,7 +10,7 @@ import {toast} from "vue3-toastify";
 
 export default defineComponent({
     name: 'TourDetailPage',
-    components: {FooterComponent, TourDetailComponent, HeaderComponent, SlideComponent},
+    components: {FooterComponent, TourDetailComponent, HeaderComponent},
     setup() {
         return {
             tourService: inject('tourService') as TourService
@@ -37,7 +37,6 @@ export default defineComponent({
 
 <template>
     <header-component/>
-    <slide-component/>
     <div class="d-flex justify-content-center">
         <div class="container">
             <tour-detail-component :tour="tour"/>

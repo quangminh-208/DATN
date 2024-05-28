@@ -35,17 +35,13 @@ export default defineComponent({
 });
 </script>
 <template>
-    <div class="text-dark text-center">
+    <div class="text-dark">
         <header-component/>
-        <div class="mb-5">
-            <br/><br/>
-            <div>
-                <h1>Chi tiết bài viết</h1>
-            </div>
-            <div class="d-flex justify-content-center">
-                <div>
-                    <h2>{{ post.title }}</h2>
-                    <div v-html="post.content"></div>
+        <div class="mb-10">
+            <div class="d-flex justify-content-center ">
+                <div class="container">
+                    <h2 class="py-15 text-center">{{ post.title }}</h2>
+                    <div v-html="post.content" class=" text-justify"></div>
                 </div>
             </div>
         </div>
