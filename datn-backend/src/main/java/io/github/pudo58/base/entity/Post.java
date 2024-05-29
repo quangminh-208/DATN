@@ -11,14 +11,14 @@ import lombok.Setter;
 @Getter
 public class Post extends BaseEntity {
     private String title;
+    @Lob
+    @Column(columnDefinition = "LONGTEXT")
     private String content;
     @Override
     public void preUpdate() {
-
     }
 
     @Override
     public void prePersist() {
-
     }
 }
