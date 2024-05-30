@@ -51,16 +51,17 @@ export default defineComponent({
             <h1>Chi tiết danh mục</h1>
         </div>
         <div class="d-flex justify-content-center">
-            <v-form class="container row col-6">
+            <v-form class="container row col-12">
                 <v-text-field v-model="post.title" label="Tên bài viết"></v-text-field>
                 <editor
                     api-key="8t1et3v8to6ab5bhaxdaqf3bskllgzzm5ab34yemfs3i150g"
                     v-model="post.content"
                     :initial-value="post.content"
+                    class=""
                 ></editor>
-                <div class="row">
-                    <v-btn class="col" color="secondary" @click="back">Quay lại</v-btn>
-                    <v-btn class="col" color="primary" @click="submit">Lưu</v-btn>
+                <div class="row d-flex justify-content-around mt-4">
+                    <v-btn class="col-2" color="secondary" @click="back">Quay lại</v-btn>
+                    <v-btn class="col-2" color="primary" @click="submit">Lưu</v-btn>
                 </div>
             </v-form>
         </div>

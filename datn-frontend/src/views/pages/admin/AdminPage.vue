@@ -147,7 +147,7 @@ export default defineComponent({
               }}</span>
             </a>
             <ul
-              class="dropdown-menu dropdown-menu-dark text-small shadow ml-3"
+              class="dropdown-menu dropdown-menu-dark text-small shadow bg-white ml-3"
               aria-labelledby="dropdownUser1"
             >
               <li>
@@ -160,7 +160,7 @@ export default defineComponent({
         </div>
       </div>
       <div class="content col p-3">
-        <slot></slot>
+        <slot ></slot>
       </div>
     </div>
   </div>

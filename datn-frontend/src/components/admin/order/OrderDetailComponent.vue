@@ -95,11 +95,11 @@ export default defineComponent({
         </div>
     </div>
     <div class="d-flex justify-content-center align-items-center mt-3">
-        <router-link to="/admin/order" class="btn btn-primary">Quay lại</router-link>
-       <v-btn color="green-darken-3" v-if="ORDER.STATUS_PENDING === order?.status">
+        <router-link to="/admin/order" class="btn btn-primary mx-3">Quay lại</router-link>
+       <v-btn color="green" v-if="ORDER.STATUS_PENDING === order?.status" class="mx-3">
            <v-icon @click="approve(order.id)">mdi-check</v-icon>
        </v-btn>
-       <v-btn color="blue-grey-lighten-2" v-if="ORDER.STATUS_PENDING === order?.status">
+       <v-btn color="red" v-if="ORDER.STATUS_PENDING === order?.status" class="mx-3">
            <v-icon @click="reject(order.id)" >mdi-close</v-icon>
        </v-btn>
     </div>

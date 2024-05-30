@@ -126,7 +126,7 @@ export default defineComponent({
                           item-value="id"
                           return-object
                 ></v-select>
-                <v-text-field v-model="tour.location" label="Địa điểm"></v-text-field>
+                <v-text-field v-model="tour.location" label="Điểm đến"></v-text-field>
                 <v-text-field v-model="tour.quantityForAdult" label="Số vé người lớn"></v-text-field>
                 <v-text-field v-model="tour.quantityForChild" label="Số vé trẻ em"></v-text-field>
                 <v-text-field v-model="tour.quantityForBaby" label="Số vé trẻ sơ sinh"></v-text-field>

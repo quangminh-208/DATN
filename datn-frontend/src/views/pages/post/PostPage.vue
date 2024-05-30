@@ -9,7 +9,7 @@ export default defineComponent({
   components: { HeaderComponent, FooterComponent },
   setup() {
     const headers = [
-      { title: "Tiêu đề", value: "title" },
+      { title: "Tiêu đề", value: "title", width: "20%" },
       { title: "Chi tiết bài viết", value: "content" },
       { title: "", value: "action", sortable: false },
     ];
@@ -58,52 +58,61 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="text-dark">
-    <header-component />
-    <div class="container my-10">
-      <div class="container">
-        <div class="row">
-          <div class="col-12">
-            <h1 class="text-center">Danh sách bài viết</h1>
-          </div>
-          <div class="col-12">
-            <div class="d-flex align-items-center">
-              <v-text-field
-                v-model="searchParams.keyword"
-                label="Tìm kiếm"
-              ></v-text-field>
-              <v-btn @click="search" color="primary">Tìm kiếm</v-btn>
-            </div>
-          </div>
-          <div class="col-12">
-            <v-data-table
-              :headers="headers"
-              :items="postPage.content"
-              :loading="isLoading"
-              :items-per-page="searchParams.size"
-              :on-update:items-per-page="search"
-              :page="searchParams.page"
-              :on-update:page="search"
-              :search="searchParams.keyword"
-              :total-items="postPage.totalElements"
-            >
-              <template v-slot:[`item.content`]="{ item }">
-                <div v-html="item.content"></div>
-              </template>
-              <template v-slot:[`item.action`]="{ item }">
-                <v-btn
-                  @click="() => viewDetail(item)"
-                  color="primary"
-                  variant="tonal"
-                  class="fw-bold"
-                  >Xem chi tiết</v-btn
-                >
-              </template>
-            </v-data-table>
-          </div>
+  <header-component />
+  <div class="container my-10 text-dark">
+    <div class="row">
+      <div class="col-12">
+        <h1 class="text-center">Danh sách bài viết</h1>
+      </div>
+      <div class="col-12">
+        <div class="d-flex align-items-center">
+          <v-text-field
+            v-model="searchParams.keyword"
+            label="Tìm kiếm"
+          ></v-text-field>
+          <v-btn @click="search" color="primary">Tìm kiếm</v-btn>
         </div>
       </div>
+      <div class="col-12">
+        <v-data-table
+          :headers="headers"
+          :items="postPage.content"
+          :loading="isLoading"
+          :items-per-page="searchParams.size"
+          :on-update:items-per-page="search"
+          :page="searchParams.page"
+          :on-update:page="search"
+          :search="searchParams.keyword"
+          :total-items="postPage.totalElements"
+        >
+          <template v-slot:[`item.title`]="{ item }">
+            <div v-html="item?.title" class=""></div>
+          </template>
+          <template v-slot:[`item.content`]="{ item }">
+            <div v-html="item?.content" class="post-content"></div>
+          </template>
+          <template v-slot:[`item.action`]="{ item }">
+            <v-btn
+              @click="() => viewDetail(item)"
+              color="primary"
+              variant="tonal"
+              class="fw-bold"
+              >Xem chi tiết</v-btn
+            >
+          </template>
+        </v-data-table>
+      </div>
     </div>
-    <footer-component />
   </div>
+  <footer-component />
 </template>
+
+<style lang="css" scoped>
+.post-content {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+</style>

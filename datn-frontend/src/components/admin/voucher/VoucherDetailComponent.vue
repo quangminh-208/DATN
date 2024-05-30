@@ -65,9 +65,9 @@ export default defineComponent({
                 <v-text-field type="datetime-local" v-model="voucher.startDate" label="Ngày bắt đầu"></v-text-field>
                 <v-text-field type="datetime-local" v-model="voucher.endDate" label="Ngày kết thúc"></v-text-field>
                 <v-text-field v-model="voucher.quantity" label="Số lượng"></v-text-field>
-                <div class="row">
-                    <v-btn class="col" color="secondary" @click="back">Quay lại</v-btn>
-                    <v-btn class="col" color="primary" @click="save">Lưu</v-btn>
+                <div class="row d-flex justify-content-around mt-4">
+                    <v-btn class="col-2" color="secondary" @click="back">Quay lại</v-btn>
+                    <v-btn class="col-2" color="primary" @click="save">Lưu</v-btn>
                 </div>
             </v-form>
         </div>

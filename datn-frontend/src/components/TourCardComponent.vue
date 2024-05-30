@@ -28,7 +28,7 @@ export default defineComponent({
         <img
           role="button"
           title="{tour.value?.name}"
-          :src="'data:image/png;base64,' + tour?.image"
+          :src="'data:image/jpg;base64,' + tour?.image"
           class="tour__img"
         />
       </div>
@@ -107,8 +107,10 @@ export default defineComponent({
     border-bottom-right-radius: 10px;
     border-bottom-left-radius: 10px;
     .tour__content__heading {
-      //   min-height: 4.5rem;
+      min-height: 4.5rem;
       padding-bottom: 4px;
+      margin-top: 1rem;
+      align-self: center;
       font-size: 1.1rem;
       font-weight: 500;
       overflow: hidden;

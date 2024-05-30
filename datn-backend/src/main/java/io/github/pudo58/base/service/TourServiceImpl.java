@@ -191,9 +191,9 @@ public class TourServiceImpl extends AbstractService<Tour> implements TourServic
             return ResponseEntity.notFound().build();
         }
         final String jsonPayload = "{\n" +
-                "  \"accountNo\": \"0704145768\",\n" +
-                "  \"accountName\": \"LA VAN THO\",\n" +
-                "  \"acqId\": 970432,\n" +
+                "  \"accountNo\": \"0211000547442\",\n" +
+                "  \"accountName\": \"NGUYEN QUANG MINH\",\n" +
+                "  \"acqId\": 970436,\n" +
                 "  \"amount\": " + order.getTotalPayment() + ",\n" +
                 "  \"addInfo\": \"" + User.getContext().getUsername() + "- Thanh toan tour gia tri " + order.getTotalPayment() + " VND\",\n" +
                 "  \"format\": \"text\",\n" +

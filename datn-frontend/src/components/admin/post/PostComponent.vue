@@ -7,10 +7,10 @@ export default defineComponent({
   name: "PostComponent",
   setup() {
     const headers = [
-      { title: "STT", value: "index" },
-      { title: "Tiêu đề", value: "title" },
+      { title: "STT", value: "index"},
+      { title: "Tiêu đề", value: "title", width: "20%"},
       { title: "Chi tiết bài viết", value: "content" },
-      { title: "Hành động", value: "action", sortable: false },
+      { title: "Hành động", value: "action", sortable: false, width: "7%"},
     ];
     return {
       headers,
@@ -101,11 +101,10 @@ export default defineComponent({
         <div
           class="post-content"
           v-html="item?.content"
-          style="white-space: pre-wrap"
         ></div>
       </template>
       <template v-slot:[`item.action`]="{ item }">
-        <td>
+        <td class="d-flex justify-content-around">
           <v-icon left @click="viewDetail(item)">mdi-eye</v-icon>
           <v-icon left @click="deletePost(item)">mdi-delete</v-icon>
         </td>

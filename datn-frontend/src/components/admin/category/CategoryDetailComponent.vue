@@ -64,9 +64,9 @@ export default defineComponent({
                           item-title="name"
                           item-value="id"
                 ></v-select>
-                <div class="row">
-                    <v-btn class="col" color="secondary" @click="back">Quay lại</v-btn>
-                    <v-btn class="col" color="primary" @click="submit">Lưu</v-btn>
+                <div class="row d-flex justify-content-around mt-4">
+                    <v-btn class="col-2" color="secondary" @click="back">Quay lại</v-btn>
+                    <v-btn class="col-2" color="primary" @click="submit">Lưu</v-btn>
                 </div>
             </v-form>
         </div>

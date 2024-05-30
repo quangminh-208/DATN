@@ -249,11 +249,6 @@ export default defineComponent({
               Giới thiệu</RouterLink
             >
           </li>
-          <li class="header__menu__item">
-            <RouterLink to="" class="header__menu__item__link">
-              Liên hệ</RouterLink
-            >
-          </li>
         </ul>
       </div>
     </div>
@@ -266,6 +261,7 @@ export default defineComponent({
   top: 0 !important;
   right: 0;
   left: 0;
+  color: $white-dove !important;
   background-color: $primary !important;
   animation: moveDown ease 0.6s;
   z-index: 100;
@@ -445,8 +441,8 @@ export default defineComponent({
         }
 
         .dropdown-menu {
-          min-width: 60vw;
-          left: -100%;
+          min-width: 50vw;
+          left: -150%;
         }
       }
 

@@ -233,7 +233,7 @@ export default defineComponent({
 }
 
 .people-list .chat-list {
-  height: 83vh;
+  height: 72vh;
   overflow: auto;
 }
 

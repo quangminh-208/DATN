@@ -3,6 +3,8 @@ package io.github.pudo58.base.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.github.pudo58.constant.UserConst;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.Authentication;
@@ -16,6 +18,8 @@ import java.util.*;
 @Entity
 @Setter
 @Getter
+@Builder
+@AllArgsConstructor
 public class User extends BaseEntity implements UserDetails {
     @Column(unique = true)
     private String username;
