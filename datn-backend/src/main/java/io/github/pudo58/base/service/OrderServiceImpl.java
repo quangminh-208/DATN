@@ -9,6 +9,8 @@ import io.github.pudo58.dto.OrderRejectRequest;
 import io.github.pudo58.dto.OrderRequest;
 import io.github.pudo58.record.AlertResponseRecord;
 import lombok.RequiredArgsConstructor;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -16,12 +18,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
 public class OrderServiceImpl extends AbstractService<Order> implements OrderService {
     private final OrderRepo orderRepo;
+    private final Logger _log = LogManager.getLogger(OrderServiceImpl.class);
 
     @Override
     public Page<Order> findBySearchForUser(OrderRequest model) {
@@ -74,10 +79,17 @@ public class OrderServiceImpl extends AbstractService<Order> implements OrderSer
     @Override
     public int[] getChart() {
         // đếm tour đã thanh toán, đã hủy, tổng doanhg thu
+        Date currentDate = new Date(System.currentTimeMillis());
         int[] chart = new int[3];
-        chart[0] = orderRepo.countByStatus(OrderConst.STATUS_COMPLETED);
-        chart[1] = orderRepo.countByStatus(OrderConst.STATUS_CANCELLED);
-        chart[2] = orderRepo.sumTotalPaymentByStatus(OrderConst.STATUS_COMPLETED);
-        return chart;
+       try{
+       chart[0] = orderRepo.sumTotalPaymentByStatus(OrderConst.STATUS_COMPLETED, currentDate);
+           chart[1] = orderRepo.sumTotalPaymentByStatus(OrderConst.STATUS_CANCELLED, currentDate);
+           chart[2] = chart[0] + chart[1];
+           return chart;
+       }
+       catch (Exception e){
+            _log.error(e);
+            return chart;
+       }
     }
 }

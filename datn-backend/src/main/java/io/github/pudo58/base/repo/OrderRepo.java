@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -36,5 +36,15 @@ public interface OrderRepo extends JpaRepository<Order, UUID>, JpaSpecificationE
             select coalesce(sum(o.totalPayment),0) from Order o where o.status = :status
     """)
     int sumTotalPaymentByStatus(int status);
+
+    @Query("""
+            select coalesce(sum(o.totalPayment),0) from Order o where o.status = :status and month(o.createDate) = month(:currentDate) and year(o.createDate) = year(:currentDate)
+    """)
+    int sumTotalPaymentByStatus(int status, Date currentDate);
+
+    @Query("""
+            select count(o.id) from Order o where o.status = :status and month(o.createDate) = month(:currentDate) and year(o.createDate) = year(:currentDate)
+    """)
+    int countSpecificMonthByStatus(int status,  Date currentDate);
 
 }

@@ -441,7 +441,7 @@ export default defineComponent({
         }
 
         .dropdown-menu {
-          min-width: 50vw;
+          min-width: 60vw;
           left: -150%;
         }
       }

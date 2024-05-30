@@ -15,14 +15,17 @@ export default defineComponent({
         }
     },
     data() {
+        const currentDate = new Date();
+        const currentMonth = currentDate.getMonth();
+        const currentYear = currentDate.getFullYear()
         return {
             chartData: {
-                labels: ['Tour đã thanh toán', 'Tour đã hủy', 'Tổng doanh thu'],
+                labels: ['Tour xác nhận thanh toán ', 'Tour đã hủy', 'Tour đã đặt'],
                 datasets: [
                     {
-                        label: 'Doanh thu',
+                        label: 'Doanh thu tháng ' + currentMonth + "/" + currentYear,
                         backgroundColor: ['#f87979', '#f87979', '#f87979'],
-                        data: [1,4,33232111]
+                        data:[33900000,0,33900000]
                     }]
             },
             chartOptions: {

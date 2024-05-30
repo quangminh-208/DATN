@@ -54,7 +54,7 @@ export default defineComponent({
                 </h2>
               </div>
             </div>
-            <div class="row row-gap-4">
+            <div class="row row-gap-4 mb-10">
               {newTours.value.map((tour, index) => (
                 <tour-card-component
                   key={index}
